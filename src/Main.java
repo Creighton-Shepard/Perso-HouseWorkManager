@@ -1,32 +1,32 @@
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import vue.TableVue;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        List<String> columnList = new ArrayList<String>();
+        columnList.add("Test1");
+        columnList.add("Test2");
+        columnList.add("Test3");
+        Controller controller = new Controller();
         primaryStage.setTitle("HouseWorkManager");
         Group root = new Group();
-        VuePrincipale vuePrincipale = new VuePrincipale(800, 600);
-        Scene scene = new Scene(root, vuePrincipale.getLongueur(), vuePrincipale.getLargeur(), Color.GRAY);
+        root.getChildren().add(new TableVue(columnList).getVBox(5, new Insets(10,0,0,10)));
+        Scene scene = new Scene(root, 800,600, Color.GRAY);
         primaryStage.setScene(scene);
-        /*Button btn = new Button();
-        btn.setLayoutX(100);
-        btn.setLayoutY(80);
-        btn.setText("Hello World !");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World");
-            }
-        });*/
-        for (Rectangle rectangle: vuePrincipale.getVueTableau().getVisuelTableau()) {
-            root.getChildren().add(rectangle);
-        }
-        //root.getChildren().add(btn);
         primaryStage.show();
     }
 
